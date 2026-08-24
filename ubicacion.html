@@ -24,6 +24,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-K3DFTXWH');</script>
 <!-- End Google Tag Manager -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1735185841170433');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1735185841170433&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -358,5 +376,248 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   }, true);
 })();
 </script>
+
+<!-- ============================================================
+     POPUP DE CAPTACION DE LEADS -> WhatsApp
+     Autocontenido: no depende de estilos ni scripts existentes.
+     Todo el CSS usa el prefijo .twvl- para evitar colisiones.
+     ============================================================ -->
+<style>
+.twvl-overlay{position:fixed;inset:0;z-index:9998;background:rgba(6,6,8,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease}
+.twvl-overlay.is-open{opacity:1;visibility:visible}
+.twvl-modal{position:relative;width:100%;max-width:440px;background:#111114;border:1px solid rgba(255,255,255,.09);border-radius:18px;box-shadow:0 25px 50px -12px rgba(0,0,0,.7);padding:34px 28px 28px;color:#fff;font-family:'Inter',system-ui,sans-serif;transform:translateY(18px) scale(.97);transition:transform .28s cubic-bezier(.16,1,.3,1);max-height:92vh;overflow-y:auto}
+.twvl-overlay.is-open .twvl-modal{transform:translateY(0) scale(1)}
+.twvl-close{position:absolute;top:12px;right:12px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease}
+.twvl-close:hover{background:rgba(255,255,255,.18)}
+.twvl-close:focus-visible{outline:2px solid #E11D2A;outline-offset:2px}
+.twvl-kicker{display:inline-block;background:rgba(225,29,42,.14);color:#E11D2A;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:99px;margin-bottom:14px}
+.twvl-title{font-family:'Bebas Neue','Inter',sans-serif;font-size:34px;line-height:1.05;letter-spacing:.5px;margin-bottom:8px}
+.twvl-sub{font-size:14px;color:#C9CCD1;margin-bottom:22px;line-height:1.5}
+.twvl-field{margin-bottom:14px}
+.twvl-label{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#C9CCD1;margin-bottom:6px}
+.twvl-input,.twvl-textarea{width:100%;background:#1A1A1F;border:1px solid #26262D;border-radius:10px;padding:13px 14px;color:#fff;font-family:inherit;font-size:15px;transition:border-color .2s ease,box-shadow .2s ease}
+.twvl-input::placeholder,.twvl-textarea::placeholder{color:#6b6f77}
+.twvl-input:focus,.twvl-textarea:focus{outline:0;border-color:#E11D2A;box-shadow:0 0 0 3px rgba(225,29,42,.18)}
+.twvl-input.twvl-invalid,.twvl-textarea.twvl-invalid{border-color:#E11D2A;background:rgba(225,29,42,.06)}
+.twvl-textarea{resize:vertical;min-height:82px}
+.twvl-error{display:none;font-size:12.5px;color:#ff6b74;margin-top:5px}
+.twvl-error.is-visible{display:block}
+.twvl-submit{width:100%;margin-top:8px;background:#25D366;color:#fff;border:0;border-radius:12px;padding:16px 20px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 14px 30px -10px rgba(37,211,102,.6);transition:background .2s ease,transform .2s ease}
+.twvl-submit:hover{background:#1FB856;transform:translateY(-2px)}
+.twvl-submit:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.twvl-note{font-size:11.5px;color:#8b9099;text-align:center;margin-top:14px;line-height:1.5}
+.twvl-success{display:none;text-align:center;padding:8px 0 4px}
+.twvl-success.is-visible{display:block}
+.twvl-success-icon{width:62px;height:62px;border-radius:50%;background:rgba(37,211,102,.14);color:#25D366;font-size:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.twvl-fallback{display:none;width:100%;margin-top:16px;background:#25D366;color:#fff;border-radius:12px;padding:15px 20px;font-weight:800;text-align:center;text-decoration:none}
+.twvl-fallback.is-visible{display:block}
+@media (max-width:480px){
+  .twvl-modal{padding:30px 20px 22px;border-radius:16px}
+  .twvl-title{font-size:29px}
+}
+@media (prefers-reduced-motion:reduce){
+  .twvl-overlay,.twvl-modal,.twvl-submit{transition:none}
+}
+</style>
+
+<div class="twvl-overlay" id="twvlOverlay" role="dialog" aria-modal="true" aria-labelledby="twvlTitle" aria-hidden="true">
+  <div class="twvl-modal">
+    <button type="button" class="twvl-close" id="twvlClose" aria-label="Cerrar">&times;</button>
+
+    <div id="twvlFormWrap">
+      <span class="twvl-kicker">Respuesta rápida</span>
+      <h2 class="twvl-title" id="twvlTitle">&iquest;Necesit&aacute;s un diagn&oacute;stico?</h2>
+      <p class="twvl-sub">Dejanos tus datos y te contactamos por WhatsApp para coordinar el turno.</p>
+
+      <form id="twvlForm" novalidate>
+        <div class="twvl-field">
+          <label class="twvl-label" for="twvlNombre">Nombre *</label>
+          <input class="twvl-input" type="text" id="twvlNombre" name="nombre" placeholder="Tu nombre" autocomplete="name" required>
+          <span class="twvl-error" id="twvlErrNombre">Ingres&aacute; tu nombre.</span>
+        </div>
+        <div class="twvl-field">
+          <label class="twvl-label" for="twvlTel">Tel&eacute;fono *</label>
+          <input class="twvl-input" type="tel" id="twvlTel" name="telefono" placeholder="11 6093-9778" autocomplete="tel" inputmode="tel" required>
+          <span class="twvl-error" id="twvlErrTel">Ingres&aacute; un tel&eacute;fono v&aacute;lido (m&iacute;nimo 8 d&iacute;gitos).</span>
+        </div>
+        <div class="twvl-field">
+          <label class="twvl-label" for="twvlMsg">&iquest;Qu&eacute; le pasa al auto? (opcional)</label>
+          <textarea class="twvl-textarea" id="twvlMsg" name="mensaje" placeholder="Ej: hace un ruido al frenar, se prendió la luz de check engine..."></textarea>
+        </div>
+        <button type="submit" class="twvl-submit">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Solicitar contacto
+        </button>
+        <p class="twvl-note">Al enviar se abre WhatsApp con tus datos ya cargados.<br>Solo ten&eacute;s que tocar enviar.</p>
+      </form>
+    </div>
+
+    <div class="twvl-success" id="twvlSuccess">
+      <div class="twvl-success-icon"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></div>
+      <h2 class="twvl-title">&iexcl;Listo!</h2>
+      <p class="twvl-sub" id="twvlSuccessMsg">Te abrimos WhatsApp con el mensaje cargado. Tocalo y envialo para que te contactemos.</p>
+      <a class="twvl-fallback" id="twvlFallback" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var WA_NUMBER   = '5491160939778';
+  var DELAY_MS    = 6500;
+  var KEY_DISMISS = 'twvl_dismissed';
+  var KEY_LEAD    = 'twvl_lead_sent';
+
+  var overlay = document.getElementById('twvlOverlay');
+  if(!overlay) return;
+
+  var form      = document.getElementById('twvlForm');
+  var formWrap  = document.getElementById('twvlFormWrap');
+  var success   = document.getElementById('twvlSuccess');
+  var successMsg= document.getElementById('twvlSuccessMsg');
+  var fallback  = document.getElementById('twvlFallback');
+  var closeBtn  = document.getElementById('twvlClose');
+  var inNombre  = document.getElementById('twvlNombre');
+  var inTel     = document.getElementById('twvlTel');
+  var inMsg     = document.getElementById('twvlMsg');
+  var errNombre = document.getElementById('twvlErrNombre');
+  var errTel    = document.getElementById('twvlErrTel');
+
+  var timer = null;
+  var leadFired = false;   // guarda en memoria: 1 sola vez por carga de pagina
+  var lastFocus = null;
+
+  // --- sessionStorage a prueba de modo privado / cookies bloqueadas ---
+  function ssGet(k){ try{ return window.sessionStorage.getItem(k); }catch(e){ return null; } }
+  function ssSet(k,v){ try{ window.sessionStorage.setItem(k,v); }catch(e){} }
+
+  function alreadyHandled(){
+    return ssGet(KEY_DISMISS) === '1' || ssGet(KEY_LEAD) === '1';
+  }
+
+  function openModal(){
+    if(alreadyHandled()) return;
+    lastFocus = document.activeElement;
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function(){ try{ inNombre.focus({preventScroll:true}); }catch(e){} }, 320);
+  }
+
+  function closeModal(persist){
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    if(persist !== false) ssSet(KEY_DISMISS,'1');
+    if(timer){ clearTimeout(timer); timer = null; }
+    if(lastFocus && lastFocus.focus){ try{ lastFocus.focus({preventScroll:true}); }catch(e){} }
+  }
+
+  // --- Evento de conversion Meta: exactamente 1 vez por envio exitoso ---
+  function fireLead(){
+    if(leadFired) return;
+    if(ssGet(KEY_LEAD) === '1') return;
+    leadFired = true;
+    ssSet(KEY_LEAD,'1');
+    if(typeof window.fbq === 'function'){
+      window.fbq('track','Lead');
+    }
+  }
+
+  function digits(s){ return (s || '').replace(/\D/g,''); }
+
+  function validate(){
+    var ok = true;
+    var nombre = inNombre.value.trim();
+    var tel    = digits(inTel.value);
+
+    if(nombre.length < 2){
+      inNombre.classList.add('twvl-invalid');
+      errNombre.classList.add('is-visible');
+      ok = false;
+    }
+    if(tel.length < 8){
+      inTel.classList.add('twvl-invalid');
+      errTel.classList.add('is-visible');
+      ok = false;
+    }
+    return ok;
+  }
+
+  function clearError(input, errEl){
+    input.addEventListener('input', function(){
+      input.classList.remove('twvl-invalid');
+      errEl.classList.remove('is-visible');
+    });
+  }
+  clearError(inNombre, errNombre);
+  clearError(inTel, errTel);
+
+  function buildWhatsAppUrl(){
+    var nombre = inNombre.value.trim();
+    var tel    = inTel.value.trim();
+    var msg    = inMsg.value.trim();
+
+    var texto = 'Hola Taller Walter Vass! Quiero solicitar contacto.\n\n' +
+                'Nombre: ' + nombre + '\n' +
+                'Teléfono: ' + tel + '\n' +
+                'Consulta: ' + (msg ? msg : '(no especificada)') + '\n\n' +
+                'Enviado desde la web.';
+
+    return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(texto);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!validate()) return;
+
+    var url = buildWhatsAppUrl();
+
+    // window.open corre DENTRO del gesto del usuario (submit por click/enter),
+    // que es la unica forma de que no lo bloquee el navegador.
+    var win = null;
+    try{ win = window.open(url, '_blank', 'noopener'); }catch(err){ win = null; }
+
+    formWrap.style.display = 'none';
+    success.classList.add('is-visible');
+
+    if(win){
+      // Handoff exitoso -> conversion real
+      fireLead();
+      // Cierra el modal solo, ya cumplio su funcion
+      setTimeout(function(){ closeModal(false); }, 4000);
+    }else{
+      // Popup bloqueado: mostramos un boton visible. El Lead se dispara
+      // recien cuando el usuario efectivamente abre WhatsApp.
+      successMsg.textContent = 'Tu navegador bloqueó la ventana. Tocá el botón para abrir WhatsApp con tu mensaje cargado.';
+      fallback.href = url;
+      fallback.classList.add('is-visible');
+      fallback.addEventListener('click', function(){
+        fireLead();
+        setTimeout(function(){ closeModal(false); }, 800);
+      }, {once:true});
+    }
+  });
+
+  // --- Cierre: X, Esc, click en el fondo ---
+  closeBtn.addEventListener('click', function(){ closeModal(true); });
+
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) closeModal(true);
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal(true);
+  });
+
+  // --- Disparo con delay ---
+  if(!alreadyHandled()){
+    timer = setTimeout(openModal, DELAY_MS);
+  }
+})();
+</script>
+<!-- End Popup de captacion de leads -->
+
 </body>
 </html>
