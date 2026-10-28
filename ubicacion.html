@@ -326,6 +326,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 // Eventos: click_whatsapp · click_call · click_maps
 // Compatible mobile/desktop · deduplicado · escalable
 // ============================================================
+<script>
 (function(){
   window.dataLayer = window.dataLayer || [];
   var lastEvent = {name:'', t:0};
@@ -334,49 +335,45 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     var now = Date.now();
     if(lastEvent.name === name && (now - lastEvent.t) < 800) return;
     lastEvent = {name:name, t:now};
-    var data = Object.assign({event:name}, payload || {});
-    window.dataLayer.push(data);
+    window.dataLayer.push(Object.assign({event:name}, payload || {}));
   }
 
   function classify(a){
     var href = (a.getAttribute('href') || '').trim();
-    var hrefLow = href.toLowerCase();
+    var low = href.toLowerCase();
     if(!href) return null;
-    if(hrefLow.indexOf('tel:') === 0){
-      return {name:'click_call', payload:{link_url:href, phone_number:href.replace(/^tel:/i,'')}};
+
+    var base = {
+      link_url: a.href,
+      link_text: (a.innerText || '').trim().substring(0, 80)
+    };
+
+    if(low.indexOf('tel:') === 0){
+      return {name:'click_call', payload:Object.assign({}, base, {phone_number:href.replace(/^tel:/i,'')})};
     }
-    if(hrefLow.indexOf('wa.me') !== -1 ||
-       hrefLow.indexOf('api.whatsapp.com') !== -1 ||
-       hrefLow.indexOf('whatsapp.com/send') !== -1 ||
-       hrefLow.indexOf('whatsapp://') === 0){
-      return {name:'click_whatsapp', payload:{link_url:a.href}};
+    if(low.indexOf('wa.me') !== -1 || low.indexOf('api.whatsapp.com') !== -1 ||
+       low.indexOf('whatsapp.com/send') !== -1 || low.indexOf('whatsapp://') === 0){
+      return {name:'click_whatsapp', payload:base};
     }
-    if(hrefLow.indexOf('maps.app.goo.gl') !== -1 ||
-       hrefLow.indexOf('google.com/maps') !== -1 ||
-       hrefLow.indexOf('goo.gl/maps') !== -1 ||
-       hrefLow.indexOf('maps.google.') !== -1){
-      return {name:'click_maps', payload:{link_url:a.href}};
+    if(low.indexOf('maps.app.goo.gl') !== -1 || low.indexOf('google.com/maps') !== -1 ||
+       low.indexOf('goo.gl/maps') !== -1 || low.indexOf('maps.google.') !== -1){
+      return {name:'click_maps', payload:base};
     }
     return null;
   }
 
-  document.addEventListener('click', function(e){
-    var a = e.target.closest('a');
+  function handler(e){
+    if(e.type === 'auxclick' && e.button !== 1) return;
+    var a = e.target.closest && e.target.closest('a');
     if(!a) return;
     var ev = classify(a);
     if(ev) pushEvent(ev.name, ev.payload);
-  }, true);
+  }
 
-  document.addEventListener('auxclick', function(e){
-    if(e.button !== 1) return;
-    var a = e.target.closest('a');
-    if(!a) return;
-    var ev = classify(a);
-    if(ev) pushEvent(ev.name, ev.payload);
-  }, true);
+  document.addEventListener('click', handler, true);
+  document.addEventListener('auxclick', handler, true);
 })();
 </script>
-
 <!-- ============================================================
      POPUP DE CAPTACION DE LEADS -> WhatsApp
      Autocontenido: no depende de estilos ni scripts existentes.
