@@ -42,7 +42,6 @@ src="https://www.facebook.com/tr?id=1735185841170433&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ubicación | Taller Walter Vass · Villa Lynch</title>
@@ -203,7 +202,6 @@ footer ul i{color:var(--rojo);width:18px}
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
@@ -232,7 +230,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <i class="fas fa-map-marker-alt"></i> Villa Lynch · Buenos Aires
         </span>
         <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.1;margin-bottom:14px">Cómo llegar a nuestro taller</h1>
-        <p style="color:FF0000;font-size:1.05rem;max-width:680px;margin:0 auto">Estamos en Ntra. Sra. del Rosario 776, Villa Lynch, Provincia de Buenos Aires. Te esperamos de lunes a viernes de 9 a 18 hs y los sábados de 9 a 14 hs.</p>
+        <p style="color:#6B7280;font-size:1.05rem;max-width:680px;margin:0 auto">Estamos en Ntra. Sra. del Rosario 776, Villa Lynch, Provincia de Buenos Aires. Te esperamos de lunes a viernes de 9 a 18 hs y los sábados de 9 a 14 hs.</p>
       </div>
 
       <div style="position:relative;width:100%;max-width:1100px;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.15);aspect-ratio:16/9">
@@ -247,14 +245,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px">
         <a href="https://maps.app.goo.gl/6dq3qxACMzndMjhP7" target="_blank" rel="noopener" class="btn btn-primary">
-              <i class="fas fa-map-marker-alt"></i> Cómo llegar
-            </a>
+          <i class="fas fa-map-marker-alt"></i> Cómo llegar
+        </a>
         <a href="https://wa.me/541160939778" class="btn btn-whatsapp">
           <i class="fa-brands fa-whatsapp"></i> WhatsApp
         </a>
         <a href="tel:+541160939778" class="btn btn-call">
-              <i class="fas fa-phone-volume"></i> Llamá ahora
-            </a>
+          <i class="fas fa-phone-volume"></i> Llamá ahora
+        </a>
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1100px;margin:50px auto 0">
@@ -320,13 +318,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     }
   });
 });
+</script>
 
+<script>
 // ============================================================
 // GTM / GA4 - Tracking unificado de conversiones
 // Eventos: click_whatsapp · click_call · click_maps
-// Compatible mobile/desktop · deduplicado · escalable
+// Envía link_url y link_text (usados por las variables DLV en GTM)
 // ============================================================
-<script>
 (function(){
   window.dataLayer = window.dataLayer || [];
   var lastEvent = {name:'', t:0};
@@ -374,6 +373,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   document.addEventListener('auxclick', handler, true);
 })();
 </script>
+
 <!-- ============================================================
      POPUP DE CAPTACION DE LEADS -> WhatsApp
      Autocontenido: no depende de estilos ni scripts existentes.
@@ -414,11 +414,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 }
 @media (prefers-reduced-motion:reduce){
   .twvl-overlay,.twvl-modal,.twvl-submit{transition:none}
-}
-  /* Solución visual directa para forzar la visibilidad del botón */
-iframe, .map-container, [class*="map"], [id*="map"] {
-  background-color: #FFFFFF !important;
-  color: #1A1A1F !important;
 }
 </style>
 
@@ -487,10 +482,9 @@ iframe, .map-container, [class*="map"], [id*="map"] {
   var errTel    = document.getElementById('twvlErrTel');
 
   var timer = null;
-  var leadFired = false;   // guarda en memoria: 1 sola vez por carga de pagina
+  var leadFired = false;
   var lastFocus = null;
 
-  // --- sessionStorage a prueba de modo privado / cookies bloqueadas ---
   function ssGet(k){ try{ return window.sessionStorage.getItem(k); }catch(e){ return null; } }
   function ssSet(k,v){ try{ window.sessionStorage.setItem(k,v); }catch(e){} }
 
@@ -516,7 +510,6 @@ iframe, .map-container, [class*="map"], [id*="map"] {
     if(lastFocus && lastFocus.focus){ try{ lastFocus.focus({preventScroll:true}); }catch(e){} }
   }
 
-  // --- Evento de conversion Meta: exactamente 1 vez por envio exitoso ---
   function fireLead(){
     if(leadFired) return;
     if(ssGet(KEY_LEAD) === '1') return;
@@ -576,8 +569,6 @@ iframe, .map-container, [class*="map"], [id*="map"] {
 
     var url = buildWhatsAppUrl();
 
-    // window.open corre DENTRO del gesto del usuario (submit por click/enter),
-    // que es la unica forma de que no lo bloquee el navegador.
     var win = null;
     try{ win = window.open(url, '_blank', 'noopener'); }catch(err){ win = null; }
 
@@ -585,13 +576,9 @@ iframe, .map-container, [class*="map"], [id*="map"] {
     success.classList.add('is-visible');
 
     if(win){
-      // Handoff exitoso -> conversion real
       fireLead();
-      // Cierra el modal solo, ya cumplio su funcion
       setTimeout(function(){ closeModal(false); }, 4000);
     }else{
-      // Popup bloqueado: mostramos un boton visible. El Lead se dispara
-      // recien cuando el usuario efectivamente abre WhatsApp.
       successMsg.textContent = 'Tu navegador bloqueó la ventana. Tocá el botón para abrir WhatsApp con tu mensaje cargado.';
       fallback.href = url;
       fallback.classList.add('is-visible');
@@ -602,7 +589,6 @@ iframe, .map-container, [class*="map"], [id*="map"] {
     }
   });
 
-  // --- Cierre: X, Esc, click en el fondo ---
   closeBtn.addEventListener('click', function(){ closeModal(true); });
 
   overlay.addEventListener('click', function(e){
@@ -613,7 +599,6 @@ iframe, .map-container, [class*="map"], [id*="map"] {
     if(e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal(true);
   });
 
-  // --- Disparo con delay ---
   if(!alreadyHandled()){
     timer = setTimeout(openModal, DELAY_MS);
   }
