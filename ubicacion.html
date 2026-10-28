@@ -415,15 +415,25 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 @media (prefers-reduced-motion:reduce){
   .twvl-overlay,.twvl-modal,.twvl-submit{transition:none}
 }
-  /* Forzar al contenedor del mapa a resetear la herencia de textos blancos */
-[class*="map"], [id*="map"], section:has(iframe), div:has(iframe) {
+  /* Solución visual directa para forzar la visibilidad del botón */
+iframe, .map-container, [class*="map"], [id*="map"] {
+  background-color: #FFFFFF !important;
   color: #1A1A1F !important;
 }
 
-/* Forzado universal por si Google inyecta el iframe dinámicamente */
-iframe {
-  color: #1A1A1F !important;
-  background-color: #FFFFFF !important;
+/* Truco de inversión por si Google Maps se resiste: obliga a que los textos claros se vuelvan oscuros */
+iframe[src*="://google.com"] body, 
+.gm-style, 
+.gm-style .place-card {
+  filter: invert(0) !important;
+  background: #FFFFFF !important;
+}
+
+/* Añade un fondo oscuro detrás del botón blanco por si la herencia no se rompe */
+.gm-style .place-card, [class*="place-card"] {
+  background-color: rgba(26, 26, 31, 0.85) !important;
+  padding: 12px !important;
+  border-radius: 8px !important;
 }
 </style>
 
