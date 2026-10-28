@@ -420,21 +420,6 @@ iframe, .map-container, [class*="map"], [id*="map"] {
   background-color: #FFFFFF !important;
   color: #1A1A1F !important;
 }
-
-/* Truco de inversión por si Google Maps se resiste: obliga a que los textos claros se vuelvan oscuros */
-iframe[src*="://google.com"] body, 
-.gm-style, 
-.gm-style .place-card {
-  filter: invert(0) !important;
-  background: #FFFFFF !important;
-}
-
-/* Añade un fondo oscuro detrás del botón blanco por si la herencia no se rompe */
-.gm-style .place-card, [class*="place-card"] {
-  background-color: rgba(26, 26, 31, 0.85) !important;
-  padding: 12px !important;
-  border-radius: 8px !important;
-}
 </style>
 
 <div class="twvl-overlay" id="twvlOverlay" role="dialog" aria-modal="true" aria-labelledby="twvlTitle" aria-hidden="true">
